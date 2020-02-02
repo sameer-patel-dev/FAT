@@ -1,0 +1,89 @@
+body{
+  overflow-x:hidden;
+}
+.mainnav{
+    box-shadow: 2px 2px 1px #cccccc;
+}
+
+.category-text{
+  font-size:13px;
+  color:#cccccc;
+}
+
+.nav-item{
+  font-size:17px;
+}
+
+.nav-link{
+  color:white;
+}
+.nav-link:hover{
+  color:#cccccc;
+}
+
+.dropdown-menu{
+  background-color:#333333;
+  border:none;
+}
+
+.dropdown-item{
+  color:white;
+}
+
+.dropdown-item:hover{
+  background-color:#333333;
+  color:#cccccc;
+}
+
+#dropdown1,#dropdown2,#dropdown3{
+  color:white;
+  background-color:#333333;
+  display:none;
+}
+
+#heading{
+    height:50px;
+}
+
+.breadcrumb,.breadcrumb-item{
+  color:#ccccc
+  font-size:10px;
+  background-color:white;
+  margin-left:10px;
+}
+
+a{
+  color:black;
+}
+
+a:hover{
+  color:grey;
+}
+
+#myChart{
+  height:10%;
+}
+
+#chart3{
+  margin-top:50px;
+}
+
+.card-img-top{
+  height:10%;
+}
+
+.heading1{
+  margin-top:100px;
+  margin-left:550px;
+  margin-bottom:
+}
+
+.table{
+  margin-left:100px;
+  margin-bottom:100px;
+  width:80%;
+}
+
+.profitcrops{
+  color:white;
+}
