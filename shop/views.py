@@ -4,7 +4,11 @@ from math import ceil
 import json
 from django.views.decorators.csrf import csrf_exempt
 from . import Checksum
+#from django.contrib.auth.forms import UserCreationForm
+from .forms import UserRegisterForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+from django.contrib import messages
 from django.http import HttpResponse
 MERCHANT_KEY = 'wagjTMFgg47kf4SV'
 
@@ -26,6 +30,18 @@ def searchMatch(query, item):
         return True
     else:
         return False
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request,f'Account created for {username}!')
+            return redirect('login')
+    else:
+        form=UserRegisterForm(request.POST)
+    return render(request,'shop/register.html',{'form':form})
 
 def search(request):
     query = request.GET.get('search')
@@ -128,6 +144,9 @@ def checkout(request):
 
     return render(request, 'shop/checkout.html')
 
+@login_required
+def profile(request):
+    return render(request,'user/profile.html')
 
 @csrf_exempt
 def handlerequest(request):
