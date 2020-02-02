@@ -1,0 +1,258 @@
+{% load static %}
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <!-- for Icons --><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <!-- Charts.js --><script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <!-- Dashboard css --><link rel="stylesheet" type="text/css" href="{% static 'shop/css/dashboard.css' %}">
+  <!-- Dashboard  js --><script src="{% static 'shop/js/dashboard.js' %}"></script>
+</head>
+<body>
+  <!-- Navbar -->
+
+  <nav class="navbar navbar-light bg-light mainnav">
+  <!-- Logo -->
+  <a class="navbar-brand" href="#">
+      Farmers Association for Trade
+  </a>
+  <!-- Logo -->
+  <button class="btn mr-2 text-danger">Logout</button>
+  </nav>
+  <!-- Navbar -->
+  <div class="conatiner">
+    <div class="row h-100">
+      <div class="col-2">
+        <!-- Dashboard Menu -->
+        <ul class="nav flex-column dashboard" style="background-color:#333333;height:100%;">
+          <li class="category-text ml-3  mt-3">CATEGORY</li>
+          <li class="nav-item mt-2">
+            <a class="nav-link active" href="#"><i class="fa fa-file p-1"></i>Farmer</a>
+          </li>
+          <li class="category-text ml-3  mt-3">APPEARANCE</li>
+          <li class="nav-item mt-2">
+            <a class="nav-link" id="nav1" href="#"><i class="fa fa-list p-1"></i>Sales Analysis<i class="fa fa-caret-down ml-3"></i></a>
+            <div id="dropdown1">
+              <ul>
+                <li class="mt-1">Crop Analysis</li>
+                <li class="mt-1">Production Analysis</li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item mt-2">
+            <a class="nav-link" id="nav2" href="#"><i class="fa fa-list p-1"></i>Crop Info<i class="fa fa-caret-down ml-3"></i></a>
+            <div id="dropdown2">
+              <ul>
+                <li class="mt-1"><a href="{% url 'Profit_Crops' %}" style="color:white;">Profitable Crops</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item mt-2">
+            <a class="nav-link" id="nav3" href="#"><i class="fa fa-list p-1"></i>Report<i class="fa fa-caret-down ml-3"></i></a>
+          </li>
+        </ul>
+        <!-- Dashboard Menu -->
+      </div>
+      <div class="col-10">
+        <div class="row mt-2 ml-3" id="heading">
+          <h2>Dashboard</h2>
+        </div>
+        <div class="row">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'ShopHome' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          </ol>
+        </div>
+        <!-- graph -->
+        <div class="row">
+          <!-- graph1 -->
+          <div class="col-6">
+            <canvas id="myChart"></canvas>
+            <script>
+                var ctx = document.getElementById('myChart');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['2009','2010','2011','2012','2013','2014'],
+                        datasets: [{
+                            label: 'Crops-Year vs Crop-Production(in million)',
+                            data: [7.6,6.3,14.3,8.1,12.9,8.6],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>
+          </div>
+          <!-- graph1 -->
+
+          <!-- graph2 -->
+          <div class="col-6">
+            <canvas id="myChart1"></canvas>
+            <script>
+                var ctx = document.getElementById('myChart1');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Kharif','Rabi','Summer','Winter','Autum'],
+                        datasets: [{
+                            label: 'Crops-Season vs Crop-Production(in million)',
+                            data: [4.02,2.05,0.17,0.43,0.06],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>
+        </div>
+        <!-- graph2 -->
+
+        <!-- graph3 -->
+        <div class="col-11" id="chart3">
+          <canvas id="myChart3" height="100px"></canvas>
+          <script>
+              var ctx = document.getElementById('myChart3');
+              var myChart = new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                      labels: ['Bajra','Banana','Cotton','Gram','Groundnut','Jowar','Jute','Maize','Onion','Potato','Rapesid','Rice','Soyabean','Sugarcane','Tapioca','Wheat'],
+                      datasets: [{
+                          label: 'Crops-Season vs Crop-Production(in million)',
+                          data: [0.121,0.146,0.3,0.099,0.111,0.114,0.181,0.273,0.072,0.424,0.090,1.6,0.141,5.5,0.105,1.3],
+                          backgroundColor: [
+                              'rgba(255, 99, 132, 0.5)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(255, 206, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(255, 159, 64, 0.2)'
+                          ],
+                          borderColor: [
+                              'rgba(255, 99, 132, 1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)',
+                              'rgba(153, 102, 255, 1)',
+                              'rgba(255, 159, 64, 1)'
+                          ],
+                          borderWidth: 1
+                      }]
+                  },
+                  options: {
+                      scales: {
+                          yAxes: [{
+                              ticks: {
+                                  beginAtZero: true
+                              }
+                          }]
+                      }
+                  }
+              });
+          </script>
+        </div>
+        <!-- graph3 -->
+      </div>
+      <!-- graph -->
+      <div class="row">
+        <div class="row heading1">
+          <h2>Schemes</h2>
+        </div>
+        <table class="table table-striped mt-5">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Scheme</th>
+              <th scope="col">Info</th>
+            </tr>
+           </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td><a href="https://www.google.com/url?q=https://soilhealth.dac.gov.in/&sa=D&source=hangouts&ust=1580653731365000&usg=AFQjCNHJ5WfirV-I6sMwEOAMweuMwhwBPw">Soil Health Card</a></td>
+              <td>he Soil Health Cards provide information to farmers on nutrient status of their soil along with recommendation on appropriate dosage of nutrients to be applied for improving soil health and its fertility. </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td><a href="https://www.google.com/url?q=https://pmfby.gov.in/&sa=D&source=hangouts&ust=1580653755790000&usg=AFQjCNFT29XSEw6_Qsm9D3gpevvdO6WFQA">Pradhan Mantri Fasal Bima Yojana (PMFBY)</a></td>
+              <td>PMFBY is an actuarial premium based scheme under which farmer has to pay maximum premium of 2% for Kharif, 1.5% for Rabi food & oilseed crops and 5% for annual commercial/horticultural crops and remaining part of the actuarial/bidded premium is shared equally by the Centre and State Government. </td>
+
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td><a href="https://www.google.com/url?q=https://www.nationalfertilizers.com/index.php?option%3Dcom_content%26view%3Darticle%26id%3D139%26Itemid%3D158%26lang%3Den&sa=D&source=hangouts&ust=1580653796605000&usg=AFQjCNE52rsyk-s_zNgeMu1en4H1dIN4YA">Neem Coated Urea (NCU)</a></td>
+              <td>This scheme is initiated to regulate use of urea, enhance availability of nitrogen to the crop and reduce cost of fertilizer application.  NCU slows down the release of fertilizer and makes it available to the crop in an effective manner.</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td><a href="https://www.google.com/url?q=https://pmksy.gov.in/&sa=D&source=hangouts&ust=1580653820959000&usg=AFQjCNE24ZUtqoM01uIedU0Ui-o6XxlSFA">Pradhan Mantri Krishi Sinchai Yojana (PMKSY)</a></td>
+              <td>It was launched on 1st July, 2015 with the motto of ‘Har Khet Ko Paani’ for providing end-to end solutions in irrigation supply chain, viz. water sources, distribution network and farm level applications. </td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td><a href="https://www.google.com/url?q=https://pgsindia-ncof.gov.in/pkvy/index.aspx&sa=D&source=hangouts&ust=1580653855318000&usg=AFQjCNGd4Kw7znqmmPTEMlZdY8YkSW1h8Q">Paramparagat Krishi Vikas Yojana (PKVY)</a></td>
+              <td>Paramparagat Krishi Vikas Yojana is implemented with a view to promote organic farming in the country. To improve soil health and organic matter content and increase net income of the farmer so as to realise premium prices. </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -128,6 +128,11 @@ def checkout(request):
 
     return render(request, 'shop/checkout.html')
 
+def dashboard(request):
+    return render(request,"shop/dashboard.html")
+
+def profit_crops(request):
+    return render(request,"shop/profit_crops.html")
 
 @csrf_exempt
 def handlerequest(request):

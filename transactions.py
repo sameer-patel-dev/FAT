@@ -14,7 +14,7 @@ class Person:
         self.unique_id=0
         self.money=0
         self.personal_details={}
-    
+
     def createPerson(self,name='',current_money=0,personal_details={}):
         self.setName(name)
         self.setMoney(current_money)
@@ -22,7 +22,7 @@ class Person:
 
     def setName(self,name=''):
         self.person_name=name
-    
+
     def getName(self):
         return self.person_name
 
@@ -58,7 +58,7 @@ class Thing:
         self.in_stock = 0
         self.attributes = {}
 
-    
+
     def createThing(self,thing_name='',current_price=0,current_stock=0,attrs={}):
         self.setThingName(thing_name)
         self.setPrice(current_price)
@@ -74,7 +74,7 @@ class Thing:
         self.thing_name = settingNameThing
     def getThingName(self):
         return self.thing_name
-    
+
     def setAttributes(self,settingAttributes={}):
         self.attributes=settingAttributes
 
@@ -121,7 +121,7 @@ class Floriculture:
         self.plants.append(some_Thing)
     def getPlants(self):
         return self.plants
-        
+
 
 class Farmer(Person):
     def __init__(self):
@@ -129,12 +129,12 @@ class Farmer(Person):
         self.plants=[]
         self.horticulture_plants=Horticulture()
         self.agriculture_plants =Agriculture()
-        self.floriculture_plants=Floriculture() 
-        # Farmer Now Has 
+        self.floriculture_plants=Floriculture()
+        # Farmer Now Has
         # self.money : set,get,send,receive
         # self.personalDetails : set,get
 
-    
+
     def setPlants(self,fruits=Horticulture(),veggies=Agriculture(),flowers=Floriculture()):
         self.horticulture_plants=fruits
         self.agriculture_plants =veggies
@@ -147,7 +147,7 @@ class Farmer(Person):
 class Customer(Person):
     def __init__(self):
         super().__init__()
-        # Farmer Now Has 
+        # Farmer Now Has
         # self.money : set,get,send,receive
         # self.personalDetails : set,get
 
@@ -232,7 +232,7 @@ class Transaction:
                 print("InSufficent Stock")
             if(ErrorThrows.error_code_amount):
                 print("InSufficient Balance")
-    
+
     def retriveTransaction(self):
         return self.message
 
@@ -278,7 +278,7 @@ class ChainedBlock:
 
     def createGenesis(self):
         genesisBlock = self.createNewBlock(0,0,Transaction())
-    
+
     def createNewTransaction(self):
         pass
 
@@ -298,32 +298,32 @@ class BlockChainInstance:
         self.blockchain = []
 
     def startBlockChain(self):
-        self.blockchain = ChainedBlock()  
+        self.blockchain = ChainedBlock()
 
     def addTextBlock(self,message="",sender="",receiver=""):
 
-        last_block = self.blockchain.get_last_block()  
-        last_proof = last_block.proof  
-        proof = self.blockchain.createProofWork(last_proof)  
+        last_block = self.blockchain.get_last_block()
+        last_proof = last_block.proof
+        proof = self.blockchain.createProofWork(last_proof)
 
-        # Sender "0" means that this node has mined a new block  
-        # For mining the Block(or finding the proof), we must be awarded with some amount(in our case this is 1) 
+        # Sender "0" means that this node has mined a new block
+        # For mining the Block(or finding the proof), we must be awarded with some amount(in our case this is 1)
         transaction = Transaction()
         transaction.createTextTransaction(message,sender,receiver)
         # get a transaction
-        last_hash = last_block.get_self_hash()  
+        last_hash = last_block.get_self_hash()
         block = self.blockchain.createNewBlock(proof, last_hash,transaction)
         transaction.closeTransaction()
 
 
     def addAmountBlock(self,buyer_name='',buyer_money=0,buyer_details={},seller_name='',seller_money=0,seller_details={},plant_name='',plant_price=0,plant_stock=0,plant_attrs={},quantity_buy=0):
 
-        last_block = self.blockchain.get_last_block()  
+        last_block = self.blockchain.get_last_block()
         last_proof = last_block.proof
-        proof = self.blockchain.createProofWork(last_proof)  
+        proof = self.blockchain.createProofWork(last_proof)
 
-        # Sender "0" means that this node has mined a new block  
-        # For mining the Block(or finding the proof), we must be awarded with some amount(in our case this is 1)  
+        # Sender "0" means that this node has mined a new block
+        # For mining the Block(or finding the proof), we must be awarded with some amount(in our case this is 1)
 
 
         transaction = Transaction()
@@ -353,7 +353,7 @@ class BlockChainInstance:
         transaction.createAmountTransaction(buyer,seller,plant_name,quantity)
 
         # get a transaction
-        last_hash = last_block.get_self_hash()  
+        last_hash = last_block.get_self_hash()
         block = self.blockchain.createNewBlock(proof, last_hash,transaction)
         transaction.closeTransaction()
 
@@ -362,18 +362,14 @@ class BlockChainInstance:
             print(" for no. : ",i)
             print(self.blockchain.blockchain[i].return_text())
 
-
-
 if __name__ == "__main__":
     sample = " ---------------------------"
     bc = BlockChainInstance()
     bc.startBlockChain()
     bc.addTextBlock("This is Message","Sender","Receiver")
     bc.addAmountBlock('Buyer',5000,{},"Seller",1000,{},"plant",20,400,{},10)
-    
+
     bc.addTextBlock("Another Message","Go go sender","By by receiver")
 
     bc.displayBlockChain()
     print(sample)
-    
-
