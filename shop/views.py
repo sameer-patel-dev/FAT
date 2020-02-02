@@ -145,15 +145,21 @@ def checkout(request):
     return render(request, 'shop/checkout.html')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @login_required
 def profile(request):
     return render(request,'user/profile.html')
 =======
+=======
+>>>>>>> 1771f5f3e62492e59b91617eb4157261a23d9882
 def dashboard(request):
     return render(request,"shop/dashboard.html")
 
 def profit_crops(request):
     return render(request,"shop/profit_crops.html")
+<<<<<<< HEAD
+>>>>>>> 1771f5f3e62492e59b91617eb4157261a23d9882
+=======
 >>>>>>> 1771f5f3e62492e59b91617eb4157261a23d9882
 
 @csrf_exempt
